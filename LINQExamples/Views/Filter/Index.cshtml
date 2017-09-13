@@ -1,0 +1,90 @@
+﻿@model  Tuple<List<IGrouping<decimal, LINQExamples.Models.Product >>>
+@{
+    ViewBag.Title = "Index";
+    int i = 0;
+}
+
+<h2>Products</h2>
+
+@foreach (var group in Model.Item1)
+{
+    <h2>@i</h2>
+    <table class="table">
+        <tr>
+            <th>
+                Id
+            </th>
+
+            <th>
+                Title
+            </th>
+
+            <th>
+                Description
+            </th>
+
+            <th>
+                Price
+            </th>
+
+            <th>
+                Category
+            </th>
+
+            <th>
+                Author
+            </th>
+
+        </tr>
+        <tr>
+            <th>
+                <input id="Id" type="text" value=""/>
+            </th>
+            <th>
+                <input id="Title" type="text" value=""/>
+            </th>
+            <th>
+                <input id="Description" type="text" value=""/>
+            </th>
+            <th>
+                <input id="Price" type="text" value=""/>
+            </th>
+            <th>
+                <select id="Category">
+                    <option></option>
+                </select>
+            </th>
+            <th>
+                <select id="Author">
+                    <option></option>
+                </select>
+            </th>
+        </tr>
+
+        @foreach (var product in group)
+        {
+            <tr>
+                <td>
+                    @product.Id
+                </td>
+                <td>
+                    @product.Title
+                </td>
+                <td>
+                    @product.Description
+                </td>
+                <td>
+                    @product.Price
+                </td>
+                <td>
+                    @product.Category.Name
+                </td>
+                <td>
+                    @product.Author.Name
+                </td>
+            </tr>
+        }
+    </table>
+
+    i++;
+}

@@ -1,0 +1,136 @@
+﻿@model  Tuple<List<LINQExamples.Models.Product>>
+@{
+    ViewBag.Title = "Index";
+    int i = 0;
+}
+
+<h2>Products</h2>
+
+
+@using (Html.BeginForm("Search", "Filter", FormMethod.Get))
+{
+    <table class="table">
+        <tr>
+            <th>
+                Id
+                
+                <a href="#" class="orderby" data-column="Id">order ME!</a>
+            </th>
+
+            <th>
+                Title
+                
+                <a href="#" class="orderby" data-column="Title">order ME!</a>
+            </th>
+
+            <th>
+                Description
+                
+                <a href="#" class="orderby" data-column="Description">order ME!</a>
+            </th>
+
+            <th>
+                Price
+                
+                <a href="#" class="orderby" data-column="Price">order ME!</a>
+            </th>
+
+            <th>
+                Category
+                
+                <a href="#" class="orderby" data-column="Category">order ME!</a>
+            </th>
+
+            <th>
+                Author
+                
+                <a href="#" class="orderby" data-column="Author">order ME!</a>
+            </th>
+
+        </tr>
+        <tr>
+            <th>
+                <input id="Id" name="Id" type="text" value=""/>
+            </th>
+            <th>
+                <input id="Title" name="TItle" type="text" value=""/>
+            </th>
+            <th>
+                <input id="Description" name="Description" type="text" value=""/>
+            </th>
+            <th>
+                <input id="Price" name="Price" type="text" value=""/>
+            </th>
+            <th>
+                <select id="Category" name="Category">
+                    <option></option>
+                </select>
+            </th>
+            <th>
+                <select id="Author" name="Author">
+                    <option></option>
+                </select>
+            </th>
+        </tr>
+        
+        <tr>
+            <td colspan="6">
+                <button>Search</button>
+            </td>
+        </tr>
+
+        @foreach (var product in Model.Item1)
+        {
+            <tr>
+                <td>
+                    @product.Id
+                </td>
+                <td>
+                    @product.Title
+                </td>
+                <td>
+                    @product.Description
+                </td>
+                <td>
+                    @product.Price
+                </td>
+                <td>
+                    @product.Category.Name
+                </td>
+                <td>
+                    @product.Author.Name
+                </td>
+            </tr>
+        }
+    </table>
+}
+
+@section scripts {
+    
+    <script>
+
+        $(".orderby").click(function (e) {
+            var columnName = $(this).data("column");
+            var params = $.url().param(); // purl js script
+           
+            params["columnOrderByName"] = columnName;
+  
+            if (params["isDesc"] == "true") {
+                params["isDesc"] = false;
+            } else {
+                params["isDesc"] = true;
+            }
+
+            window.location = "?" + $.param(params);
+
+            e.preventDefault();
+        });
+
+        //$("form").submit(function() {
+
+        //    window.location = 
+        //});
+            
+
+    </script>
+}
